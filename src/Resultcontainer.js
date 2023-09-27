@@ -15,12 +15,13 @@ function Resultcontainer(){
  
   })
     function changeScore(e){
+      let value = e.target.value
       let key = e.target.className
-      let scoreObj = testScore
-      scoreObj[key] = e.target.value
-      console.log(scoreObj)
-      setTestScore(scoreObj)
-
+      if(value > 100 || value < 0 || isNaN(value) ){
+        return
+      }
+      setTestScore({...testScore, [key]: value})
+     
     }
     return(
         
@@ -32,13 +33,13 @@ function Resultcontainer(){
             <p className='summary'>English Language results</p>
             <Itemscontainer>
             {/* blue */}
-              <Testitems color='#c3d7f7' fontColor='#3e87fa' name='Speaking' testScore={testScore} changeScore={changeScore} /> 
+              <Testitems color='#c3d7f7' fontColor='#3e87fa' name='Speaking' testScore={testScore['Speaking']} changeScore={changeScore} /> 
             {/* red */}
-              <Testitems color='#fab6af' fontColor='#fa513e' name='Listening' testScore={testScore} changeScore={changeScore} />
+              <Testitems color='#fab6af' fontColor='#fa513e' name='Listening' testScore={testScore['Listening']} changeScore={changeScore} />
             {/* green */}
-              <Testitems color='#bafaaf' fontColor='#258a13' name='Reading' testScore={testScore} changeScore={changeScore} />
+              <Testitems color='#bafaaf' fontColor='#258a13' name='Reading' testScore={testScore['Reading']} changeScore={changeScore} />
             {/* pruple */}
-              <Testitems color='#edc0ed' fontColor='#991f99' name='Writing' testScore={testScore} changeScore={changeScore} />
+              <Testitems color='#edc0ed' fontColor='#991f99' name='Writing' testScore={testScore['Writing']} changeScore={changeScore} />
             </Itemscontainer>
             <Testbutton>Continue</Testbutton>
             </div>
