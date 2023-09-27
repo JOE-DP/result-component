@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom/client';
 import styled from 'styled-components'
 
 function Testitems(props){
-  
+  console.log(props.testScore[props.name])
     return(
         
           <Container style={{background: props.color, color: props.fontColor}}>
             <p className='subject'>{props.name}</p>
-            <p className='score'>10/100</p>
+            <p className='score'><input onChange={props.changeScore} class={props.name} value={props.testScore[props.name]}></input>/100</p>
             
           </Container>
         
