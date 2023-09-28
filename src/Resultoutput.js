@@ -2,18 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import styled from 'styled-components'
 
-function Resultoutput(){
+function Resultoutput(props){
     return(
         
           <Container>
             <h2>Your average result</h2>
             <div className='circle'>
               <div>
-              <p>78<span>%</span></p>
+              <p>{props.averageScore}<span>%</span></p>
               </div>
             </div>
-            <h2>Brilliant!</h2>
-            <h3>You have passed and will be able to enrol on the next stage of the course</h3>
+            <h2>{props.header}</h2>
+            <h3>{props.message}</h3>
 
           </Container>
         
@@ -24,9 +24,15 @@ function Resultoutput(){
 export default Resultoutput
 
 const Container = styled.div`
+
+
+@media only screen and (max-width: 1200px) {
+  height: 100%;
+    }
+
 height: 100%;
-background: rgb(195,215,247);
-background: radial-gradient(circle, rgba(195,215,247,1) 21%, rgba(250,182,175,1) 100%); 
+background: rgb(229,252,194);
+background: linear-gradient(180deg, rgba(229,252,194,1) 15%, rgba(157,224,173,1) 55%, rgba(69,173,168,1) 83%, rgba(84,121,128,1) 97%);
 width: 100%;
 border-radius: 35px;
 display: flex;
@@ -54,21 +60,12 @@ span{
   color: #5e5d5e;
 }
 
-.resultContainer{
-  padding-top: 50%;
-  border: 2px solid black;
-  background-color: red;
-  margin-top: 10%;
-  width: 300px;
-  height: px;
-  display: flex;
-}
 .circle {
   margin-top: 10%;
   height: 250px;
   width: 250px;
   border-radius: 50%;
-  background-color: #c3d7f7;
+  background-color: rgba(255, 255, 255, 0.4);
   color: white;
   display: flex;
   align-items: center;

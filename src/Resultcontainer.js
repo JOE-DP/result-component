@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import styled from 'styled-components'
 import Resultoutput from './Resultoutput';
@@ -8,26 +8,47 @@ function Resultcontainer(){
 
     const [testScore, setTestScore] = useState(
       {
-        'Speaking': "",
-        'Listening': "",
-        'Reading': "",
-        'Writing': ""
+        'Speaking': 0,
+        'Listening': 0,
+        'Reading': 0,
+        'Writing': 0
  
   })
+    const [averageScore, setAverageScore] = useState(0)
+    const [messages, setMessages] = useState({'header': '', 'message': ''})
+
     function changeScore(e){
       let value = e.target.value
       let key = e.target.className
       if(value > 100 || value < 0 || isNaN(value) ){
         return
       }
-      setTestScore({...testScore, [key]: value})
-     
-    }
+      if(true){
+      setTestScore({...testScore, [key]: Number(value)})
+      }
+      }
+      useEffect(() => {
+        let averageUpdate = Math.round((testScore['Speaking'] + testScore['Listening'] + testScore['Reading'] + testScore['Writing'] ) / 4)
+        setAverageScore(averageUpdate)
+      }, [testScore])
+      useEffect(() => {
+        if(averageScore > 80){
+          setMessages({'message': 'You have passed and will be able to enrol on the next stage of the course',
+          'header': 'Brilliant!'})
+        } else if(averageScore > 60){
+          setMessages({'message': 'You have passed and will be able to enrol on the next stage of the course',
+          'header': 'Good'})
+        } else{
+          setMessages({'message': 'You will have to try again if you would like to enrol on the next course',
+          'header': 'Not great!'})
+        }
+      }, [averageScore])
+      
     return(
         
           <Container>
             <div className='halfDivideContainer'>
-            <Resultoutput />
+            <Resultoutput averageScore={averageScore} message = {messages.message} header={messages.header}/>
             </div>
             <div className='halfDivideContainer'>
             <p className='summary'>English Language results</p>
@@ -66,14 +87,12 @@ border-radius: 30px;
 font-family: 'Open Sans', sans-serif;
 height: 10%;
 font-size: 1.6rem;
-color: #4d4c4d;
+color: #E5FCC2;
 margin-bottom: 10%;
-background: rgb(195,215,247);
-background: linear-gradient(90deg, rgba(195,215,247,1) 21%, rgba(250,182,175,1) 100%); 
+background: #594F4F; 
 `
 const Container = styled.div`
 height: 80vh;
-background: white;
 font-size: 4rem;
 width: 60%;
 margin: auto;
@@ -82,7 +101,7 @@ display: flex;
 .summary{
   padding-top: 5%;
   text-align: center;
-  color: #4d4c4d;
+  color: #594F4F;
   font-family: 'Open Sans', sans-serif;
   font-size: 1.6rem;
   font-weight: bold;
@@ -93,7 +112,6 @@ display: flex;
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
 }
 
 left: 50%;
@@ -103,6 +121,25 @@ position: absolute;
 transform: translate(-50%, -50%);
 box-shadow: 11px 10px 40px -10px rgba(123,126,140,0.62);
 border-radius: 35px;
+
+@media only screen and (max-width: 1200px) {
+flex-direction: column;
+height: 30vh;
+margin-top: 5%;
+justify-content: flex-start;
+
+// reset position
+left: 0;
+right: 0;
+position: relative;
+transform: none;
+
+.halfDivideContainer{
+  width: 100%;
+height: 200%;
+}
+
+}
 
 `
 
