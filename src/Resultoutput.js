@@ -1,10 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import styled from 'styled-components'
 
 function Resultoutput(props){
-    return(
-        
+    return(        
           <Container>
             <h2>Your average result</h2>
             <div className='circle'>
@@ -14,21 +12,14 @@ function Resultoutput(props){
             </div>
             <h2>{props.header}</h2>
             <h3>{props.message}</h3>
-
           </Container>
         
     )
 }
 
-
 export default Resultoutput
 
 const Container = styled.div`
-
-
-@media only screen and (max-width: 1200px) {
-  height: 100%;
-    }
 
 height: 100%;
 background: rgb(229,252,194);
@@ -38,6 +29,7 @@ border-radius: 35px;
 display: flex;
 flex-direction: column;
 align-items: center;
+
 h2, p, h3{
   margin-top: 10%;
   color: #4d4c4d;
@@ -59,7 +51,6 @@ h3{
 span{
   color: #5e5d5e;
 }
-
 .circle {
   margin-top: 10%;
   height: 250px;
@@ -71,4 +62,23 @@ span{
   align-items: center;
   justify-content: center;
 }
+
+@media only screen and (max-width: 1000px) {
+ 
+  .circle {
+    height: 200px;
+    width: 200px;
+  }
+  }
+
+@media only screen and (max-width: 800px) {
+  h2{
+    font-size: 1.6rem;   
+  }
+  
+  .circle {
+    height: 150px;
+    width: 150px;
+  }
+  }
 `
